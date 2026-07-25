@@ -10,11 +10,27 @@ class Settings:
     )
 
     clinical_trials_timeout_seconds: float = float(
-        os.getenv("CLINICAL_TRIALS_TIMEOUT_SECONDS", "20")
+        os.getenv(
+            "CLINICAL_TRIALS_TIMEOUT_SECONDS",
+            "20",
+        )
     )
 
     clinical_trials_page_size: int = int(
-        os.getenv("CLINICAL_TRIALS_PAGE_SIZE", "100")
+        os.getenv(
+            "CLINICAL_TRIALS_PAGE_SIZE",
+            "100",
+        )
+    )
+
+    openai_api_key: str = os.getenv(
+        "OPENAI_API_KEY",
+        "",
+    )
+
+    openai_model: str = os.getenv(
+        "OPENAI_MODEL",
+        "gpt-5-mini",
     )
 
 
