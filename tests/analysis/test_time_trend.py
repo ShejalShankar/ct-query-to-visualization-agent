@@ -98,13 +98,13 @@ def test_generates_citations_for_each_year():
 
     result = analyze_time_trend(studies)
 
-    assert result.citations[0].key == "2020"
+    assert result.citations[0].key == "year:2020"
     assert result.citations[0].nct_ids == [
         "NCT00000001",
         "NCT00000002",
     ]
 
-    assert result.citations[1].key == "2021"
+    assert result.citations[1].key == "year:2021"
     assert result.citations[1].nct_ids == ["NCT00000003"]
 
 

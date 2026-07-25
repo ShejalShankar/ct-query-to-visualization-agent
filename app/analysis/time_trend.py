@@ -79,7 +79,7 @@ def analyze_time_trend(
 
     citations = [
         CitationGroup(
-            key=str(year),
+            key=f"year:{year}",
             nct_ids=sorted(studies_by_year.get(year, [])),
         )
         for year in years

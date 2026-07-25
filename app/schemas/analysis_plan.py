@@ -72,15 +72,6 @@ class NetworkDefinition(BaseModel):
     source: NetworkEntity
     target: NetworkEntity
 
-    @model_validator(mode="after")
-    def validate_distinct_entities(self) -> "NetworkDefinition":
-        if self.source == self.target:
-            raise ValueError(
-                "Network source and target entities must be different"
-            )
-
-        return self
-
 
 class AnalysisPlan(BaseModel):
     model_config = ConfigDict(
@@ -129,7 +120,7 @@ class AnalysisPlan(BaseModel):
                         "conditions": ["Breast Cancer"],
                     },
                     "network": {
-                        "source": "sponsor",
+                        "source": "drug",
                         "target": "drug",
                     },
                     "visualization_type": "network_graph",
