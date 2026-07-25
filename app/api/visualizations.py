@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-
+from app.schemas.analysis_plan import AnalysisPlan
 from app.schemas.request import VisualizationRequest
 
 router = APIRouter(
@@ -15,4 +15,14 @@ async def validate_visualization_request(
     return {
         "status": "valid",
         "normalized_request": request.model_dump(mode="json"),
+    }
+
+
+@router.post("/analysis-plans/validate")
+async def validate_analysis_plan(
+    plan: AnalysisPlan,
+) -> dict[str, object]:
+    return {
+        "status": "valid",
+        "analysis_plan": plan.model_dump(mode="json"),
     }
