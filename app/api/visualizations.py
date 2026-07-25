@@ -1,7 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Query
 from app.schemas.analysis_plan import AnalysisPlan
 from app.schemas.request import VisualizationRequest
 from app.schemas.response import VisualizationResponse
+from typing import Annotated
+from app.clinical_trials.client import ClinicalTrialsClient
+from app.clinical_trials.dependencies import get_clinical_trials_client
 
 router = APIRouter(
     prefix="/api/v1",
@@ -36,3 +39,29 @@ async def validate_visualization_response(
         "status": "valid",
         "response": response.model_dump(mode="json"),
     }
+
+@router.get("/clinical-trials/search")
+async def search_clinical_trials(
+    client: Annotated[
+        ClinicalTrialsClient,
+        Depends(get_clinical_trials_client),
+    ],
+    query_term: Annotated[
+        str,
+        Query(
+            min_length=2,
+            max_length=300,
+            description="ClinicalTrials.gov full-text search query.",
+        ),
+    ],
+    max_studies: Annotated[
+        int,
+        Query(ge=1, le=1000),
+    ] = 10,
+) -> dict[str, object]:
+    result = await client.search_studies(
+        query_term=query_term,
+        max_studies=max_studies,
+    )
+
+    return result.model_dump(mode="json")
