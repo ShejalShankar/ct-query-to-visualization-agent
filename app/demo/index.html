@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>ClinicalTrials.gov Visualization Agent</title>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"
+    ></script>
+
+    <style>
+        :root {
+            color-scheme: light;
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            --background: #f5f7fb;
+            --surface: #ffffff;
+            --surface-muted: #f8fafc;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #dbe2ea;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --danger: #b91c1c;
+            --warning: #92400e;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        button,
+        textarea {
+            font: inherit;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 40px 0 64px;
+        }
+
+        .hero {
+            margin-bottom: 28px;
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            max-width: 760px;
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.08;
+        }
+
+        .subtitle {
+            max-width: 760px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .query-card {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 650;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 112px;
+            resize: vertical;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        textarea:focus {
+            outline: 3px solid rgba(37, 99, 235, 0.16);
+            border-color: var(--accent);
+        }
+
+        .query-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        .primary-button {
+            min-width: 130px;
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 18px;
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .primary-button:hover {
+            background: var(--accent-dark);
+        }
+
+        .primary-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .status {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .error {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #fef2f2;
+            color: var(--danger);
+            white-space: pre-wrap;
+        }
+
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .example-button {
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: var(--surface-muted);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .example-button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.visible {
+            display: block;
+        }
+
+        .chart-card {
+            margin-bottom: 22px;
+        }
+
+        .chart-header {
+            margin-bottom: 10px;
+        }
+
+        .chart-header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .chart-description {
+            margin: 8px 0 0;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        #chart {
+            width: 100%;
+            height: 520px;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(155px, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .metric {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .metric-value {
+            margin-top: 5px;
+            font-size: 24px;
+            font-weight: 750;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .detail-content {
+            margin-top: 14px;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .detail-content strong {
+            color: var(--text);
+        }
+
+        .detail-list {
+            margin: 8px 0 0;
+            padding-left: 20px;
+        }
+
+        .citation-group {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .citation-group:last-child {
+            border-bottom: 0;
+        }
+
+        .citation-title {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .citation-record {
+            margin-top: 8px;
+            padding: 10px;
+            border-radius: 10px;
+            background: var(--surface-muted);
+            font-size: 13px;
+        }
+
+        .citation-record a {
+            color: var(--accent);
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .citation-record a:hover {
+            text-decoration: underline;
+        }
+
+        .partial-warning {
+            display: none;
+            margin-bottom: 22px;
+            padding: 13px 16px;
+            border-radius: 12px;
+            background: #fffbeb;
+            color: var(--warning);
+        }
+
+        .partial-warning.visible {
+            display: block;
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                width: min(100% - 20px, 1180px);
+                padding-top: 24px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .query-actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .primary-button {
+                width: 100%;
+            }
+
+            #chart {
+                height: 430px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <section class="hero">
+            <p class="eyebrow">ClinicalTrials.gov intelligence</p>
+
+            <h1>
+                Clinical Trials Visualization Agent
+            </h1>
+
+            <p class="subtitle">
+                Ask clinical research questions in natural language. The agent 
+                plans the analysis with an LLM, retrieves data, generates evidence-backed 
+                visualizations, and provides traceable citations for every result.
+            </p>
+        </section>
+
+        <section class="card query-card">
+            <label for="query">
+                Ask a clinical-trial question
+            </label>
+
+            <textarea
+                id="query"
+                placeholder="How have pembrolizumab trials changed since 2015?"
+            ></textarea>
+
+            <div class="examples" id="examples"></div>
+
+            <div class="query-actions">
+                <span class="status" id="status">
+                    Select an example or enter your own question.
+                </span>
+
+                <button
+                    class="primary-button"
+                    id="analyze-button"
+                    type="button"
+                >
+                    Analyze
+                </button>
+            </div>
+
+            <div class="error" id="error" hidden></div>
+        </section>
+
+        <section class="results" id="results">
+            <div
+                class="partial-warning"
+                id="partial-warning"
+            ></div>
+
+            <section class="card chart-card">
+                <div class="chart-header">
+                    <h2 id="chart-title"></h2>
+                    <p
+                        class="chart-description"
+                        id="chart-description"
+                    ></p>
+                </div>
+
+                <div
+                    id="chart"
+                    role="img"
+                    aria-label="Generated clinical trial visualization"
+                ></div>
+            </section>
+
+            <section class="metrics">
+                <article class="metric">
+                    <div class="metric-label">Intent</div>
+                    <div class="metric-value" id="intent">—</div>
+                </article>
+
+                <article class="metric">
+                    <div class="metric-label">Planner confidence</div>
+                    <div class="metric-value" id="confidence">—</div>
+                </article>
+
+                <article class="metric">
+                    <div class="metric-label">Records matched</div>
+                    <div class="metric-value" id="matched">—</div>
+                </article>
+
+                <article class="metric">
+                    <div class="metric-label">Records used</div>
+                    <div class="metric-value" id="used">—</div>
+                </article>
+
+                <article class="metric">
+                    <div class="metric-label">Records excluded</div>
+                    <div class="metric-value" id="excluded">—</div>
+                </article>
+            </section>
+
+            <section class="details-grid">
+                <details open>
+                    <summary>Analysis details</summary>
+
+                    <div class="detail-content">
+                        <p>
+                            <strong>Interpretation:</strong>
+                            <span id="reasoning"></span>
+                        </p>
+
+                        <p>
+                            <strong>Filters:</strong>
+                            <span id="filters"></span>
+                        </p>
+
+                        <div>
+                            <strong>Assumptions</strong>
+                            <ul
+                                class="detail-list"
+                                id="assumptions"
+                            ></ul>
+                        </div>
+
+                        <div>
+                            <strong>Warnings</strong>
+                            <ul
+                                class="detail-list"
+                                id="warnings"
+                            ></ul>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        Source citations
+                        (<span id="citation-count">0</span>)
+                    </summary>
+
+                    <div
+                        class="detail-content"
+                        id="citations"
+                    ></div>
+                </details>
+            </section>
+        </section>
+    </main>
+
+    <script>
+        const examples = [
+            {
+                label: "Trial trend",
+                query:
+                    "How have pembrolizumab trials changed since 2015?"
+            },
+            {
+                label: "Phase distribution",
+                query:
+                    "Show the distribution of trial phases for pembrolizumab."
+            },
+            {
+                label: "Drug comparison",
+                query:
+                    "Compare pembrolizumab and nivolumab trial counts over time."
+            },
+            {
+                label: "Country ranking",
+                query:
+                    "Which countries have conducted the most breast cancer clinical trials?"
+            },
+            {
+                label: "Drug network",
+                query:
+                    "Show drug co-occurrence relationships in breast cancer trials."
+            }
+        ];
+
+        const queryInput = document.getElementById("query");
+        const analyzeButton =
+            document.getElementById("analyze-button");
+        const statusElement = document.getElementById("status");
+        const errorElement = document.getElementById("error");
+        const resultsElement = document.getElementById("results");
+        const examplesElement = document.getElementById("examples");
+
+        let chart = null;
+
+        for (const example of examples) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "example-button";
+            button.textContent = example.label;
+
+            button.addEventListener("click", () => {
+                queryInput.value = example.query;
+                queryInput.focus();
+            });
+
+            examplesElement.appendChild(button);
+        }
+
+        analyzeButton.addEventListener("click", analyze);
+
+        queryInput.addEventListener("keydown", (event) => {
+            if (
+                event.key === "Enter"
+                && (event.metaKey || event.ctrlKey)
+            ) {
+                analyze();
+            }
+        });
+
+        async function analyze() {
+            const query = queryInput.value.trim();
+
+            if (query.length < 3) {
+                showError(
+                    "Enter a clinical-trial question of at least three characters."
+                );
+                return;
+            }
+
+            setLoading(true);
+            hideError();
+
+            try {
+                const response = await fetch(
+                    "/api/v1/visualizations",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            query,
+                            max_studies: 200,
+                            include_citations: true,
+                            max_citations_per_datum: 5
+                        })
+                    }
+                );
+
+                const payload = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        formatApiError(payload)
+                    );
+                }
+
+                renderResponse(payload);
+            } catch (error) {
+                showError(
+                    error instanceof Error
+                        ? error.message
+                        : "Unable to generate the visualization."
+                );
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function renderResponse(payload) {
+            const visualization = payload.visualization;
+            const meta = payload.meta;
+
+            resultsElement.classList.add("visible");
+
+            document.getElementById("chart-title").textContent =
+                visualization.title;
+
+            document.getElementById(
+                "chart-description"
+            ).textContent = visualization.description || "";
+
+            document.getElementById("intent").textContent =
+                humanize(meta.analysis_plan.intent);
+
+            document.getElementById("confidence").textContent =
+                `${Math.round(meta.analysis_plan.confidence * 100)}%`;
+
+            document.getElementById("matched").textContent =
+                meta.records_matched.toLocaleString();
+
+            document.getElementById("used").textContent =
+                meta.records_used.toLocaleString();
+
+            document.getElementById("excluded").textContent =
+                meta.records_excluded.toLocaleString();
+
+            document.getElementById("reasoning").textContent =
+                meta.analysis_plan.reasoning_summary;
+
+            document.getElementById("filters").textContent =
+                formatFilters(meta.filters_applied);
+
+            renderList("assumptions", meta.assumptions);
+            renderList("warnings", meta.warnings);
+            renderPartialWarning(meta);
+            renderCitations(payload.citations);
+            renderVisualization(visualization);
+
+            requestAnimationFrame(() => {
+                resultsElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            });
+        }
+
+        function renderVisualization(visualization) {
+            if (chart) {
+                chart.dispose();
+            }
+
+            const container = document.getElementById("chart");
+            chart = echarts.init(container);
+
+            let option;
+
+            switch (visualization.type) {
+                case "time_series":
+                    option = buildTimeSeriesOption(visualization);
+                    break;
+
+                case "bar_chart":
+                    option = buildBarChartOption(visualization);
+                    break;
+
+                case "grouped_bar_chart":
+                    option = buildGroupedBarOption(visualization);
+                    break;
+
+                case "network_graph":
+                    option = buildNetworkOption(visualization);
+                    break;
+
+                default:
+                    throw new Error(
+                        `Unsupported visualization type: ${visualization.type}`
+                    );
+            }
+
+            chart.setOption(option);
+
+            window.addEventListener(
+                "resize",
+                () => chart && chart.resize(),
+                { once: true }
+            );
+        }
+
+        function buildTimeSeriesOption(visualization) {
+            const xField = visualization.encoding.x.field;
+            const yField = visualization.encoding.y.field;
+            const data = visualization.data || [];
+
+            return {
+                tooltip: {
+                    trigger: "axis"
+                },
+                grid: {
+                    left: 60,
+                    right: 30,
+                    top: 35,
+                    bottom: 55
+                },
+                xAxis: {
+                    type: "category",
+                    name: visualization.encoding.x.label,
+                    nameLocation: "middle",
+                    nameGap: 36,
+                    data: data.map((datum) => datum[xField])
+                },
+                yAxis: {
+                    type: "value",
+                    minInterval: 1,
+                    name: visualization.encoding.y.label
+                },
+                series: [
+                    {
+                        name: visualization.encoding.y.label,
+                        type: "line",
+                        smooth: true,
+                        symbolSize: 8,
+                        areaStyle: {
+                            opacity: 0.08
+                        },
+                        data: data.map((datum) => datum[yField])
+                    }
+                ]
+            };
+        }
+
+        function buildBarChartOption(visualization) {
+            const xField = visualization.encoding.x.field;
+            const yField = visualization.encoding.y.field;
+            const data = visualization.data || [];
+            const useHorizontalLayout = data.length >= 7;
+
+            if (useHorizontalLayout) {
+                return {
+                    tooltip: {
+                        trigger: "axis",
+                        axisPointer: {
+                            type: "shadow"
+                        }
+                    },
+                    grid: {
+                        left: 145,
+                        right: 35,
+                        top: 25,
+                        bottom: 45
+                    },
+                    xAxis: {
+                        type: "value",
+                        minInterval: 1,
+                        name: visualization.encoding.y.label
+                    },
+                    yAxis: {
+                        type: "category",
+                        inverse: true,
+                        data: data.map((datum) => datum[xField])
+                    },
+                    series: [
+                        {
+                            type: "bar",
+                            name: visualization.encoding.y.label,
+                            data: data.map((datum) => datum[yField]),
+                            itemStyle: {
+                                borderRadius: [0, 5, 5, 0]
+                            }
+                        }
+                    ]
+                };
+            }
+
+            return {
+                tooltip: {
+                    trigger: "axis",
+                    axisPointer: {
+                        type: "shadow"
+                    }
+                },
+                grid: {
+                    left: 60,
+                    right: 30,
+                    top: 25,
+                    bottom: 75
+                },
+                xAxis: {
+                    type: "category",
+                    name: visualization.encoding.x.label,
+                    nameLocation: "middle",
+                    nameGap: 54,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: data.length > 4 ? 25 : 0
+                    },
+                    data: data.map((datum) => datum[xField])
+                },
+                yAxis: {
+                    type: "value",
+                    minInterval: 1,
+                    name: visualization.encoding.y.label
+                },
+                series: [
+                    {
+                        type: "bar",
+                        name: visualization.encoding.y.label,
+                        data: data.map((datum) => datum[yField]),
+                        itemStyle: {
+                            borderRadius: [5, 5, 0, 0]
+                        }
+                    }
+                ]
+            };
+        }
+
+        function buildGroupedBarOption(visualization) {
+            const data = visualization.data || [];
+            const xField = visualization.encoding.x.field;
+            const yField = visualization.encoding.y.field;
+            const seriesField =
+                visualization.encoding.series.field;
+
+            const xValues = [
+                ...new Set(data.map((datum) => datum[xField]))
+            ].sort();
+
+            const groups = [
+                ...new Set(data.map((datum) => datum[seriesField]))
+            ];
+
+            const series = groups.map((group) => {
+                const byXValue = new Map(
+                    data
+                        .filter(
+                            (datum) =>
+                                datum[seriesField] === group
+                        )
+                        .map(
+                            (datum) => [
+                                datum[xField],
+                                datum[yField]
+                            ]
+                        )
+                );
+
+                return {
+                    name: group,
+                    type: "bar",
+                    data: xValues.map(
+                        (xValue) => byXValue.get(xValue) || 0
+                    )
+                };
+            });
+
+            return {
+                tooltip: {
+                    trigger: "axis",
+                    axisPointer: {
+                        type: "shadow"
+                    }
+                },
+                legend: {
+                    top: 0
+                },
+                grid: {
+                    left: 60,
+                    right: 30,
+                    top: 55,
+                    bottom: 55
+                },
+                xAxis: {
+                    type: "category",
+                    name: visualization.encoding.x.label,
+                    nameLocation: "middle",
+                    nameGap: 36,
+                    data: xValues
+                },
+                yAxis: {
+                    type: "value",
+                    minInterval: 1,
+                    name: visualization.encoding.y.label
+                },
+                series
+            };
+        }
+
+        function buildNetworkOption(visualization) {
+            const nodes = visualization.nodes || [];
+            const edges = visualization.edges || [];
+
+            const maxNodeWeight = Math.max(
+                1,
+                ...nodes.map((node) => Number(node.weight || 1))
+            );
+
+            return {
+                tooltip: {
+                    formatter(params) {
+                        if (params.dataType === "edge") {
+                            return (
+                                `${params.data.source} ↔ `
+                                + `${params.data.target}<br>`
+                                + `${params.data.value} shared studies`
+                            );
+                        }
+
+                        return (
+                            `${params.data.name}<br>`
+                            + `${params.data.value} studies`
+                        );
+                    }
+                },
+                series: [
+                    {
+                        type: "graph",
+                        layout: "force",
+                        roam: true,
+                        draggable: true,
+                        label: {
+                            show: true,
+                            position: "right",
+                            formatter: "{b}"
+                        },
+                        labelLayout: {
+                            hideOverlap: true
+                        },
+                        force: {
+                            repulsion: 220,
+                            edgeLength: [65, 155],
+                            gravity: 0.08
+                        },
+                        emphasis: {
+                            focus: "adjacency",
+                            lineStyle: {
+                                width: 4
+                            }
+                        },
+                        data: nodes.map((node) => ({
+                            id: node.id,
+                            name: node.label,
+                            value: node.weight || 0,
+                            symbolSize:
+                                18
+                                + (
+                                    Number(node.weight || 0)
+                                    / maxNodeWeight
+                                ) * 34
+                        })),
+                        links: edges.map((edge) => ({
+                            source: edge.source,
+                            target: edge.target,
+                            value: edge.weight,
+                            lineStyle: {
+                                width:
+                                    1
+                                    + Math.min(edge.weight, 5)
+                            }
+                        })),
+                        lineStyle: {
+                            opacity: 0.55,
+                            curveness: 0.08
+                        }
+                    }
+                ]
+            };
+        }
+
+        function renderPartialWarning(meta) {
+            const element =
+                document.getElementById("partial-warning");
+
+            if (!meta.partial_results) {
+                element.classList.remove("visible");
+                element.textContent = "";
+                return;
+            }
+
+            element.textContent =
+                "Partial result: Showing the first 200 matching studies. This visualization may not include every matching ClinicalTrials.gov record.";
+
+            element.classList.add("visible");
+        }
+
+        function renderCitations(citations) {
+            const container =
+                document.getElementById("citations");
+
+            const entries = Object.entries(citations || {});
+
+            document.getElementById(
+                "citation-count"
+            ).textContent = entries.length.toLocaleString();
+
+            container.replaceChildren();
+
+            if (!entries.length) {
+                container.textContent =
+                    "No citations were included in this response.";
+                return;
+            }
+
+            for (const [reference, group] of entries) {
+                const groupElement =
+                    document.createElement("section");
+
+                groupElement.className = "citation-group";
+
+                const title = document.createElement("div");
+                title.className = "citation-title";
+                title.textContent =
+                    `${reference} · ${group.total_records} supporting studies`;
+
+                groupElement.appendChild(title);
+
+                for (const record of group.records) {
+                    const recordElement =
+                        document.createElement("div");
+
+                    recordElement.className = "citation-record";
+
+                    const link = document.createElement("a");
+                    link.href =
+                        `https://clinicaltrials.gov/study/${record.nct_id}`;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = record.nct_id;
+
+                    const excerpt = document.createElement("div");
+                    excerpt.textContent = record.excerpt;
+
+                    recordElement.appendChild(link);
+                    recordElement.appendChild(excerpt);
+                    groupElement.appendChild(recordElement);
+                }
+
+                if (group.truncated) {
+                    const note = document.createElement("div");
+                    note.className = "citation-record";
+                    note.textContent =
+                        "Additional supporting records were omitted "
+                        + "because of the citation limit.";
+
+                    groupElement.appendChild(note);
+                }
+
+                container.appendChild(groupElement);
+            }
+        }
+
+        function renderList(elementId, values) {
+            const list = document.getElementById(elementId);
+            list.replaceChildren();
+
+            if (!values || values.length === 0) {
+                const item = document.createElement("li");
+                item.textContent = "None";
+                list.appendChild(item);
+                return;
+            }
+
+            for (const value of values) {
+                const item = document.createElement("li");
+                item.textContent = value;
+                list.appendChild(item);
+            }
+        }
+
+        function formatFilters(filters) {
+            const entries = Object.entries(filters || {});
+
+            if (!entries.length) {
+                return "No explicit filters";
+            }
+
+            return entries
+                .map(([key, value]) => {
+                    const rendered = Array.isArray(value)
+                        ? value.join(", ")
+                        : String(value);
+
+                    return `${humanize(key)}: ${rendered}`;
+                })
+                .join(" · ");
+        }
+
+        function humanize(value) {
+            return String(value)
+                .replaceAll("_", " ")
+                .replace(/\b\w/g, (character) =>
+                    character.toUpperCase()
+                );
+        }
+
+        function formatApiError(payload) {
+            if (typeof payload?.detail === "string") {
+                return payload.detail;
+            }
+
+            if (Array.isArray(payload?.detail)) {
+                return payload.detail
+                    .map((item) => item.msg || JSON.stringify(item))
+                    .join("\n");
+            }
+
+            return "The request failed.";
+        }
+
+        function setLoading(loading) {
+            analyzeButton.disabled = loading;
+            analyzeButton.textContent =
+                loading ? "Analyzing…" : "Analyze";
+
+            statusElement.textContent = loading
+                ? "Planning, retrieving, and analyzing studies…"
+                : "Press Command/Ctrl + Enter to analyze.";
+        }
+
+        function showError(message) {
+            errorElement.textContent = message;
+            errorElement.hidden = false;
+        }
+
+        function hideError() {
+            errorElement.hidden = true;
+            errorElement.textContent = "";
+        }
+    </script>
+</body>
+</html>

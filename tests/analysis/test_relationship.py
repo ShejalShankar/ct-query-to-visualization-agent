@@ -133,26 +133,41 @@ def test_matching_is_case_insensitive():
     assert result.edges[0].weight == 2
 
 
-def test_excludes_studies_without_interventions():
-    studies = [
-        make_study(
-            "NCT00000001",
-            intervention_names=["Pembrolizumab"],
-        ),
-        make_study(
-            "NCT00000002",
-            intervention_names=[],
-        ),
-    ]
-
-    result = analyze_intervention_relationships(studies)
-
-    assert result.included_studies == 1
-    assert result.excluded_studies == 1
-    assert any(
-        "excluded" in warning
-        for warning in result.warnings
+def test_excludes_non_drug_interventions() -> None:
+    study = NormalizedStudy(
+        nct_id="NCT00000001",
+        title="Example Study",
+        overall_status="COMPLETED",
+        start_date=None,
+        start_date_raw=None,
+        phases=[],
+        conditions=["Breast Cancer"],
+        interventions=[
+            NormalizedIntervention(
+                name="Pembrolizumab",
+                intervention_type=NormalizedInterventionType.DRUG,
+            ),
+            NormalizedIntervention(
+                name="Quality-of-Life Assessment",
+                intervention_type=(
+                    NormalizedInterventionType.BEHAVIORAL
+                ),
+            ),
+        ],
+        lead_sponsor=None,
+        countries=[],
     )
+
+    result = analyze_intervention_relationships([study])
+
+    node_labels = {
+        node.label
+        for node in result.nodes
+    }
+
+    assert "Pembrolizumab" in node_labels
+    assert "Quality-of-Life Assessment" not in node_labels
+
 
 
 def test_filters_edges_by_minimum_weight():

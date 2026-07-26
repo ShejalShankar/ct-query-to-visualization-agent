@@ -2,13 +2,16 @@ from functools import lru_cache
 
 from openai import AsyncOpenAI
 
-from app.core.config import get_settings
+from app.core.config import settings
 from app.planner.llm_planner import LLMPlanner
 
 
 @lru_cache
 def get_openai_client() -> AsyncOpenAI:
-    settings = get_settings()
+    if not settings.openai_api_key:
+        raise RuntimeError(
+            "OPENAI_API_KEY is not configured"
+        )
 
     return AsyncOpenAI(
         api_key=settings.openai_api_key,
@@ -18,8 +21,6 @@ def get_openai_client() -> AsyncOpenAI:
 
 
 def get_planner() -> LLMPlanner:
-    settings = get_settings()
-
     return LLMPlanner(
         client=get_openai_client(),
         model=settings.openai_model,

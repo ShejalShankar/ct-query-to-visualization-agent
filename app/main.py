@@ -5,6 +5,12 @@ from fastapi import FastAPI
 from app.api.health import router as health_router
 from app.api.visualizations import router as visualization_router
 from app.core.config import settings
+from pathlib import Path
+from fastapi.responses import FileResponse
+
+
+DEMO_FILE = Path(__file__).parent / "demo" / "index.html"
+
 
 
 @asynccontextmanager
@@ -46,6 +52,14 @@ app.include_router(visualization_router)
 async def root() -> dict[str, str]:
     return {
         "name": "ClinicalTrials.gov Query-to-Visualization Agent",
+        "demo": "/demo",
         "documentation": "/docs",
         "health": "/health",
     }
+
+@app.get(
+    "/demo",
+    include_in_schema=False,
+)
+async def demo() -> FileResponse:
+    return FileResponse(DEMO_FILE)

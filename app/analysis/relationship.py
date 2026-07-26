@@ -8,7 +8,11 @@ from app.analysis.models import (
     NetworkNode,
     RelationshipNetworkResult,
 )
-from app.clinical_trials.normalized_models import NormalizedStudy
+from app.clinical_trials.normalized_models import (
+    NormalizedInterventionType,
+    NormalizedStudy,
+
+)
 
 
 def analyze_intervention_relationships(
@@ -18,11 +22,10 @@ def analyze_intervention_relationships(
     max_nodes: int | None = 25,
 ) -> RelationshipNetworkResult:
     """
-    Build a co-occurrence network from normalized intervention names.
-
-    Each node represents an intervention. An edge connects two interventions
-    when they appear in the same study. Edge weight is the number of distinct
-    studies in which the pair co-occurs.
+    Build a co-occurrence network from normalized drug intervention names.
+    Each node represents a drug. An edge connects two drugs when they appear in
+    the same study. Edge weight is the number of distinct studies in which the
+    pair co-occurs.
     """
 
     if minimum_edge_weight <= 0:
@@ -125,13 +128,13 @@ def analyze_intervention_relationships(
     if excluded_count:
         warnings.append(
             f"{excluded_count} studies were excluded because they had no "
-            "usable intervention names."
+            "usable drug intervention names."
         )
 
     if max_nodes is not None and total_nodes > max_nodes:
         warnings.append(
             f"The network was limited to the top {max_nodes} of "
-            f"{total_nodes} interventions."
+            f"{total_nodes} drugs."
         )
 
     removed_edge_count = sum(
@@ -155,7 +158,7 @@ def analyze_intervention_relationships(
         )
     elif not edges:
         warnings.append(
-            "Interventions were found, but no qualifying co-occurrence "
+            "Drugs were found, but no qualifying co-occurrence "
             "relationships were identified."
         )
 
@@ -176,13 +179,17 @@ def _extract_interventions(
     interventions: dict[str, str] = {}
 
     for intervention in study.interventions:
-        display_name = " ".join(intervention.name.split())
+        if (
+            intervention.intervention_type
+            != NormalizedInterventionType.DRUG
+        ):
+            continue
 
+        display_name = " ".join(intervention.name.split())
         if not display_name:
             continue
 
         normalized_name = _normalize_name(display_name)
-
         interventions.setdefault(
             normalized_name,
             display_name,
