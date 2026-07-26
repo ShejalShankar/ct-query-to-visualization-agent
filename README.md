@@ -50,7 +50,7 @@ The LLM decides what analysis the user is requesting. It does not retrieve recor
 
 ## Key Design Decsions
 
-### LLM planning, deterministic execution
+#### LLM planning, deterministic execution
 The planner converts flexible natural language into a validated AnalysisPlan.
 All downstream computations are performed in Python against normalized
 ClinicalTrials.gov records.
@@ -58,7 +58,7 @@ This reduces hallucination risk and makes analytical results reproducible and
 unit-testable.
 
 
-### Strong contracts between layers
+#### Strong contracts between layers
 Pydantic models define contracts for:
 * user requests
 * planner output
@@ -71,14 +71,14 @@ Invalid or inconsistent data fails early rather than silently reaching the
 client.
 
 
-### Normalization before analysis
+#### Normalization before analysis
 ClinicalTrials.gov records contain nested, optional, and partially structured
 fields. The normalization layer converts them into a stable internal domain
 model and records warnings for missing or invalid values.
 This keeps upstream API-specific details out of the analysis engine.
 
 
-### Explicit partial-result handling
+#### Explicit partial-result handling
 Broad ClinicalTrials.gov queries may match thousands of records. Requests
 therefore enforce a configurable retrieval limit.
 ```
@@ -90,7 +90,7 @@ therefore enforce a configurable retrieval limit.
 ```
 
 
-### Datum-level traceability
+#### Datum-level traceability
 Chart data and network relationships reference citation groups containing:
 * NCT identifier
 * normalized or source field
@@ -120,16 +120,16 @@ app/
 
 ## Running locally
 
-### 1. Create and activate an environment
+#### 1. Create and activate an environment
 ```
 conda create -n clinical-trials-agent python=3.12
 conda activate clinical-trials-agent
 ```
-### 2. Install dependencies
+#### 2. Install dependencies
 ```
 pip install -r requirements.txt
 ```
-### 3. Configure environment variables
+#### 3. Configure environment variables
 ```
 cp .env.example .env
 
@@ -140,7 +140,7 @@ OPENAI_API_KEY=your_api_key
 OPENAI_MODEL=gpt-5-mini
 ```
 
-### 4. Start the service
+#### 4. Start the service
 ```
 uvicorn app.main:app --reload
 ```
