@@ -1,16 +1,48 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends, Query
+
+from app.clinical_trials.client import ClinicalTrialsClient
+from app.clinical_trials.dependencies import (
+    get_clinical_trials_client,
+)
+from app.clinical_trials.normalizer import normalize_studies
+from app.orchestration.dependencies import (
+    get_visualization_orchestrator,
+)
+from app.orchestration.orchestrator import (
+    VisualizationOrchestrator,
+)
 from app.schemas.analysis_plan import AnalysisPlan
 from app.schemas.request import VisualizationRequest
 from app.schemas.response import VisualizationResponse
-from typing import Annotated
-from app.clinical_trials.client import ClinicalTrialsClient
-from app.clinical_trials.dependencies import get_clinical_trials_client
-from app.clinical_trials.normalizer import normalize_studies
+
 
 router = APIRouter(
     prefix="/api/v1",
     tags=["visualizations"],
 )
+
+
+@router.post(
+    "/visualizations",
+    response_model=VisualizationResponse,
+    summary="Generate a clinical-trial visualization",
+    description=(
+        "Interpret a natural-language clinical-trial question, retrieve "
+        "matching studies from ClinicalTrials.gov, run deterministic "
+        "analysis, and return a visualization specification with metadata "
+        "and citations."
+    ),
+)
+async def create_visualization(
+    request: VisualizationRequest,
+    orchestrator: Annotated[
+        VisualizationOrchestrator,
+        Depends(get_visualization_orchestrator),
+    ],
+) -> VisualizationResponse:
+    return await orchestrator.run(request)
 
 
 @router.post("/visualizations/validate")
@@ -32,6 +64,7 @@ async def validate_analysis_plan(
         "analysis_plan": plan.model_dump(mode="json"),
     }
 
+
 @router.post("/responses/validate")
 async def validate_visualization_response(
     response: VisualizationResponse,
@@ -40,6 +73,7 @@ async def validate_visualization_response(
         "status": "valid",
         "response": response.model_dump(mode="json"),
     }
+
 
 @router.get("/clinical-trials/search")
 async def search_clinical_trials(
@@ -64,6 +98,7 @@ async def search_clinical_trials(
         query_term=query_term,
         max_studies=max_studies,
     )
+
     return result.model_dump(mode="json")
 
 
