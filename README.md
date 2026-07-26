@@ -1,4 +1,5 @@
 # Clinical Trials Visualization Agent
+
 An AI-assisted backend that converts natural-language clinical-trial questions into interactive, traceable visualization specifications using live data from
 ClinicalTrials.gov.
 
@@ -42,7 +43,9 @@ Visualization specification
 Interactive chart + citations
 ```
 
+
 The LLM decides what analysis the user is requesting. It does not retrieve records, count studies, calculate rankings, or invent chart data.
+
 
 
 ## Key Design Decsions
@@ -86,6 +89,7 @@ therefore enforce a configurable retrieval limit.
 }
 ```
 
+
 ### Datum-level traceability
 Chart data and network relationships reference citation groups containing:
 * NCT identifier
@@ -94,6 +98,7 @@ Chart data and network relationships reference citation groups containing:
 * total contributing records
 * citation truncation status
 This makes every visualized result inspectable against its source studies.
+
 
 ## Project structure
 ```
@@ -111,6 +116,7 @@ app/
 ├── visualization/     # Frontend-friendly response builder
 └── main.py            # FastAPI application and shared client lifecycle
 ```
+
 
 ## Running locally
 
@@ -133,6 +139,7 @@ CLINICAL_TRIALS_PAGE_SIZE=100
 OPENAI_API_KEY=your_api_key
 OPENAI_MODEL=gpt-5-mini
 ```
+
 ### 4. Start the service
 ```
 uvicorn app.main:app --reload
@@ -140,6 +147,7 @@ uvicorn app.main:app --reload
 Open:
 * Demo: http://127.0.0.1:8000/demo
 * Swagger: http://127.0.0.1:8000/docs
+
 
 ### API example
 curl -X POST "http://127.0.0.1:8000/api/v1/visualizations" \
@@ -151,10 +159,34 @@ curl -X POST "http://127.0.0.1:8000/api/v1/visualizations" \
     "max_citations_per_datum": 5
   }'
 
+
 ### Testing
 The test suite covers API retrieval, pagination, normalization, deterministic
 analysis, visualization construction, planner behavior, dispatch, orchestration,
 and HTTP endpoint validation.
 
+```
+pytest -q
+```
+
+
+### Current tradeoffs
+* Broad queries may return partial results because retrieval is deliberately
+    bounded for predictable latency.
+* The current comparison engine supports named drug comparisons.
+* The current relationship graph supports drug-to-drug co-occurrence.
+* Planner confidence is model-reported rather than empirically calibrated.
+* The demo is intentionally thin; the backend response contract remains the
+    primary product interface.
+
+
+### Future improvements
+* Push more structured filters directly into ClinicalTrials.gov query syntax.
+* Add cursor-based continuation for complete large-result analyses.
+* Add planner evaluation datasets and confidence calibration.
+* Support condition and sponsor comparisons.
+* Add sponsor-to-drug and condition-to-drug networks.
+* Add caching for repeated retrieval and analysis requests.
+* Add structured observability for planner, retrieval, and analysis latency.
 
 
