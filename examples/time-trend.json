@@ -1,0 +1,525 @@
+{
+    "status": "completed",
+    "visualization": {
+        "type": "time_series",
+        "title": "Pembrolizumab Trials Started by Year",
+        "description": "Number of matching clinical studies grouped by study start year.",
+        "encoding": {
+            "x": {
+                "field": "year",
+                "data_type": "temporal",
+                "label": "Start year",
+                "unit": null
+            },
+            "y": {
+                "field": "trial_count",
+                "data_type": "quantitative",
+                "label": "Number of trials",
+                "unit": "trials"
+            }
+        },
+        "data": [
+            {
+                "datum_id": "year:2015",
+                "citation_ref": "year:2015",
+                "year": 2015,
+                "trial_count": 6
+            },
+            {
+                "datum_id": "year:2016",
+                "citation_ref": "year:2016",
+                "year": 2016,
+                "trial_count": 10
+            },
+            {
+                "datum_id": "year:2017",
+                "citation_ref": "year:2017",
+                "year": 2017,
+                "trial_count": 27
+            },
+            {
+                "datum_id": "year:2018",
+                "citation_ref": "year:2018",
+                "year": 2018,
+                "trial_count": 23
+            },
+            {
+                "datum_id": "year:2019",
+                "citation_ref": "year:2019",
+                "year": 2019,
+                "trial_count": 17
+            },
+            {
+                "datum_id": "year:2020",
+                "citation_ref": "year:2020",
+                "year": 2020,
+                "trial_count": 18
+            },
+            {
+                "datum_id": "year:2021",
+                "citation_ref": "year:2021",
+                "year": 2021,
+                "trial_count": 11
+            },
+            {
+                "datum_id": "year:2022",
+                "citation_ref": "year:2022",
+                "year": 2022,
+                "trial_count": 23
+            },
+            {
+                "datum_id": "year:2023",
+                "citation_ref": "year:2023",
+                "year": 2023,
+                "trial_count": 15
+            },
+            {
+                "datum_id": "year:2024",
+                "citation_ref": "year:2024",
+                "year": 2024,
+                "trial_count": 12
+            },
+            {
+                "datum_id": "year:2025",
+                "citation_ref": "year:2025",
+                "year": 2025,
+                "trial_count": 21
+            },
+            {
+                "datum_id": "year:2026",
+                "citation_ref": "year:2026",
+                "year": 2026,
+                "trial_count": 13
+            }
+        ],
+        "nodes": null,
+        "edges": null
+    },
+    "meta": {
+        "source": "ClinicalTrials.gov",
+        "generated_at": "2026-07-26T15:49:58.046048Z",
+        "query": "How have pembrolizumab trials changed since 2015?",
+        "analysis_plan": {
+            "intent": "time_trend",
+            "metric": "trial_count",
+            "group_by": "start_year",
+            "compare_by": null,
+            "network": null,
+            "filters": {
+                "drug_names": [
+                    "Pembrolizumab"
+                ],
+                "conditions": [],
+                "phases": [],
+                "sponsors": [],
+                "countries": [],
+                "recruitment_statuses": [],
+                "start_year": 2015,
+                "end_year": null
+            },
+            "visualization_type": "time_series",
+            "confidence": 0.9,
+            "reasoning_summary": "Count annual number of clinical trials whose intervention includes pembrolizumab, starting from 2015, and display as a time series of trial counts by start year."
+        },
+        "filters_applied": {
+            "drug_names": [
+                "Pembrolizumab"
+            ],
+            "start_year": 2015
+        },
+        "records_matched": 200,
+        "records_used": 196,
+        "records_excluded": 0,
+        "assumptions": [
+            "Studies were grouped using their normalized study start date."
+        ],
+        "warnings": [],
+        "partial_results": true
+    },
+    "citations": {
+        "year:2015": {
+            "total_records": 6,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02325557",
+                    "field": "normalized.start_date",
+                    "excerpt": "2015-06-04"
+                },
+                {
+                    "nct_id": "NCT02423863",
+                    "field": "normalized.start_date",
+                    "excerpt": "2015-03-01"
+                },
+                {
+                    "nct_id": "NCT02437071",
+                    "field": "normalized.start_date",
+                    "excerpt": "2015-04-01"
+                },
+                {
+                    "nct_id": "NCT02437136",
+                    "field": "normalized.start_date",
+                    "excerpt": "2015-08-26"
+                },
+                {
+                    "nct_id": "NCT02443324",
+                    "field": "normalized.start_date",
+                    "excerpt": "2015-07-29"
+                }
+            ]
+        },
+        "year:2016": {
+            "total_records": 10,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02574598",
+                    "field": "normalized.start_date",
+                    "excerpt": "2016-06-01"
+                },
+                {
+                    "nct_id": "NCT02578680",
+                    "field": "normalized.start_date",
+                    "excerpt": "2016-01-15"
+                },
+                {
+                    "nct_id": "NCT02673333",
+                    "field": "normalized.start_date",
+                    "excerpt": "2016-02-01"
+                },
+                {
+                    "nct_id": "NCT02707588",
+                    "field": "normalized.start_date",
+                    "excerpt": "2016-05-18"
+                },
+                {
+                    "nct_id": "NCT02721732",
+                    "field": "normalized.start_date",
+                    "excerpt": "2016-08-15"
+                }
+            ]
+        },
+        "year:2017": {
+            "total_records": 27,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02580994",
+                    "field": "normalized.start_date",
+                    "excerpt": "2017-12-08"
+                },
+                {
+                    "nct_id": "NCT02706353",
+                    "field": "normalized.start_date",
+                    "excerpt": "2017-06-02"
+                },
+                {
+                    "nct_id": "NCT02736266",
+                    "field": "normalized.start_date",
+                    "excerpt": "2017-02-27"
+                },
+                {
+                    "nct_id": "NCT02818920",
+                    "field": "normalized.start_date",
+                    "excerpt": "2017-01-01"
+                },
+                {
+                    "nct_id": "NCT02872259",
+                    "field": "normalized.start_date",
+                    "excerpt": "2017-02-13"
+                }
+            ]
+        },
+        "year:2018": {
+            "total_records": 23,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT03113487",
+                    "field": "normalized.start_date",
+                    "excerpt": "2018-02-01"
+                },
+                {
+                    "nct_id": "NCT03197506",
+                    "field": "normalized.start_date",
+                    "excerpt": "2018-01-15"
+                },
+                {
+                    "nct_id": "NCT03260504",
+                    "field": "normalized.start_date",
+                    "excerpt": "2018-08-28"
+                },
+                {
+                    "nct_id": "NCT03275506",
+                    "field": "normalized.start_date",
+                    "excerpt": "2018-02-26"
+                },
+                {
+                    "nct_id": "NCT03311308",
+                    "field": "normalized.start_date",
+                    "excerpt": "2018-02-07"
+                }
+            ]
+        },
+        "year:2019": {
+            "total_records": 17,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT03161431",
+                    "field": "normalized.start_date",
+                    "excerpt": "2019-06-12"
+                },
+                {
+                    "nct_id": "NCT03474497",
+                    "field": "normalized.start_date",
+                    "excerpt": "2019-05-20"
+                },
+                {
+                    "nct_id": "NCT03544099",
+                    "field": "normalized.start_date",
+                    "excerpt": "2019-05-07"
+                },
+                {
+                    "nct_id": "NCT03654833",
+                    "field": "normalized.start_date",
+                    "excerpt": "2019-01-28"
+                },
+                {
+                    "nct_id": "NCT03769532",
+                    "field": "normalized.start_date",
+                    "excerpt": "2019-08-21"
+                }
+            ]
+        },
+        "year:2020": {
+            "total_records": 18,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT04069442",
+                    "field": "normalized.start_date",
+                    "excerpt": "2020-06-01"
+                },
+                {
+                    "nct_id": "NCT04120454",
+                    "field": "normalized.start_date",
+                    "excerpt": "2020-06-17"
+                },
+                {
+                    "nct_id": "NCT04164082",
+                    "field": "normalized.start_date",
+                    "excerpt": "2020-03-18"
+                },
+                {
+                    "nct_id": "NCT04171219",
+                    "field": "normalized.start_date",
+                    "excerpt": "2020-03-19"
+                },
+                {
+                    "nct_id": "NCT04211103",
+                    "field": "normalized.start_date",
+                    "excerpt": "2020-10-14"
+                }
+            ]
+        },
+        "year:2021": {
+            "total_records": 11,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT04282044",
+                    "field": "normalized.start_date",
+                    "excerpt": "2021-01-08"
+                },
+                {
+                    "nct_id": "NCT04284787",
+                    "field": "normalized.start_date",
+                    "excerpt": "2021-02-16"
+                },
+                {
+                    "nct_id": "NCT04536922",
+                    "field": "normalized.start_date",
+                    "excerpt": "2021-01-27"
+                },
+                {
+                    "nct_id": "NCT04611139",
+                    "field": "normalized.start_date",
+                    "excerpt": "2021-12-31"
+                },
+                {
+                    "nct_id": "NCT04725331",
+                    "field": "normalized.start_date",
+                    "excerpt": "2021-02-25"
+                }
+            ]
+        },
+        "year:2022": {
+            "total_records": 23,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT04925986",
+                    "field": "normalized.start_date",
+                    "excerpt": "2022-02-10"
+                },
+                {
+                    "nct_id": "NCT04943445",
+                    "field": "normalized.start_date",
+                    "excerpt": "2022-02-22"
+                },
+                {
+                    "nct_id": "NCT04967417",
+                    "field": "normalized.start_date",
+                    "excerpt": "2022-05-26"
+                },
+                {
+                    "nct_id": "NCT05131919",
+                    "field": "normalized.start_date",
+                    "excerpt": "2022-12-22"
+                },
+                {
+                    "nct_id": "NCT05158062",
+                    "field": "normalized.start_date",
+                    "excerpt": "2022-04-20"
+                }
+            ]
+        },
+        "year:2023": {
+            "total_records": 15,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT05020860",
+                    "field": "normalized.start_date",
+                    "excerpt": "2023-04-18"
+                },
+                {
+                    "nct_id": "NCT05318469",
+                    "field": "normalized.start_date",
+                    "excerpt": "2023-10-13"
+                },
+                {
+                    "nct_id": "NCT05496036",
+                    "field": "normalized.start_date",
+                    "excerpt": "2023-02-13"
+                },
+                {
+                    "nct_id": "NCT05504720",
+                    "field": "normalized.start_date",
+                    "excerpt": "2023-02-13"
+                },
+                {
+                    "nct_id": "NCT05563558",
+                    "field": "normalized.start_date",
+                    "excerpt": "2023-05-05"
+                }
+            ]
+        },
+        "year:2024": {
+            "total_records": 12,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT05485766",
+                    "field": "normalized.start_date",
+                    "excerpt": "2024-07-16"
+                },
+                {
+                    "nct_id": "NCT06228326",
+                    "field": "normalized.start_date",
+                    "excerpt": "2024-04-17"
+                },
+                {
+                    "nct_id": "NCT06311981",
+                    "field": "normalized.start_date",
+                    "excerpt": "2024-08-08"
+                },
+                {
+                    "nct_id": "NCT06374602",
+                    "field": "normalized.start_date",
+                    "excerpt": "2024-03-25"
+                },
+                {
+                    "nct_id": "NCT06388031",
+                    "field": "normalized.start_date",
+                    "excerpt": "2024-08-09"
+                }
+            ]
+        },
+        "year:2025": {
+            "total_records": 21,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT04569461",
+                    "field": "normalized.start_date",
+                    "excerpt": "2025-06-01"
+                },
+                {
+                    "nct_id": "NCT06599619",
+                    "field": "normalized.start_date",
+                    "excerpt": "2025-02-20"
+                },
+                {
+                    "nct_id": "NCT06618287",
+                    "field": "normalized.start_date",
+                    "excerpt": "2025-02-04"
+                },
+                {
+                    "nct_id": "NCT06670911",
+                    "field": "normalized.start_date",
+                    "excerpt": "2025-02-20"
+                },
+                {
+                    "nct_id": "NCT06774989",
+                    "field": "normalized.start_date",
+                    "excerpt": "2025-01-02"
+                }
+            ]
+        },
+        "year:2026": {
+            "total_records": 13,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT07198074",
+                    "field": "normalized.start_date",
+                    "excerpt": "2026-01-27"
+                },
+                {
+                    "nct_id": "NCT07315750",
+                    "field": "normalized.start_date",
+                    "excerpt": "2026-01-01"
+                },
+                {
+                    "nct_id": "NCT07327229",
+                    "field": "normalized.start_date",
+                    "excerpt": "2026-02-27"
+                },
+                {
+                    "nct_id": "NCT07347210",
+                    "field": "normalized.start_date",
+                    "excerpt": "2026-01-01"
+                },
+                {
+                    "nct_id": "NCT07415031",
+                    "field": "normalized.start_date",
+                    "excerpt": "2026-05-06"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,646 @@
+{
+    "status": "completed",
+    "visualization": {
+        "type": "network_graph",
+        "title": "Clinical Trial Intervention Co-occurrence Network",
+        "description": "Interventions are connected when they appear in the same study. Relationship weight is the number of supporting studies.",
+        "encoding": {
+            "source": {
+                "field": "source",
+                "data_type": "nominal",
+                "label": "Source intervention",
+                "unit": null
+            },
+            "target": {
+                "field": "target",
+                "data_type": "nominal",
+                "label": "Target intervention",
+                "unit": null
+            },
+            "weight": {
+                "field": "weight",
+                "data_type": "quantitative",
+                "label": "Shared studies",
+                "unit": "studies"
+            }
+        },
+        "data": null,
+        "nodes": [
+            {
+                "id": "capecitabine",
+                "label": "Capecitabine",
+                "entity_type": "drug",
+                "weight": 9,
+                "citation_ref": null
+            },
+            {
+                "id": "docetaxel",
+                "label": "Docetaxel",
+                "entity_type": "drug",
+                "weight": 4,
+                "citation_ref": null
+            },
+            {
+                "id": "fulvestrant",
+                "label": "Fulvestrant",
+                "entity_type": "drug",
+                "weight": 3,
+                "citation_ref": null
+            },
+            {
+                "id": "trastuzumab",
+                "label": "Trastuzumab",
+                "entity_type": "drug",
+                "weight": 3,
+                "citation_ref": null
+            },
+            {
+                "id": "letrozole",
+                "label": "Letrozole",
+                "entity_type": "drug",
+                "weight": 2,
+                "citation_ref": null
+            },
+            {
+                "id": "paclitaxel",
+                "label": "Paclitaxel",
+                "entity_type": "drug",
+                "weight": 2,
+                "citation_ref": null
+            },
+            {
+                "id": "pertuzumab",
+                "label": "Pertuzumab",
+                "entity_type": "drug",
+                "weight": 2,
+                "citation_ref": null
+            },
+            {
+                "id": "carboplatin",
+                "label": "carboplatin",
+                "entity_type": "drug",
+                "weight": 2,
+                "citation_ref": null
+            },
+            {
+                "id": "cyclophosphamide",
+                "label": "cyclophosphamide",
+                "entity_type": "drug",
+                "weight": 2,
+                "citation_ref": null
+            },
+            {
+                "id": "placebo",
+                "label": "placebo",
+                "entity_type": "drug",
+                "weight": 2,
+                "citation_ref": null
+            },
+            {
+                "id": "(18f)fes",
+                "label": "(18F)FES",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "18f fluoroestradiol radiopharmaceutical with pet/ct",
+                "label": "18F Fluoroestradiol Radiopharmaceutical with PET/CT",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "5-fu\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide",
+                "label": "5-FU\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "5-fu\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide",
+                "label": "5-FU\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "9-ing-41",
+                "label": "9-ING-41",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "a",
+                "label": "A",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "azd2281",
+                "label": "AZD2281",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "alpelisib",
+                "label": "Alpelisib",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "anastrozole",
+                "label": "Anastrozole",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "antihistamine",
+                "label": "Antihistamine",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "apatinib",
+                "label": "Apatinib",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "artiss",
+                "label": "Artiss",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "avelumab",
+                "label": "Avelumab",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "b",
+                "label": "B",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            },
+            {
+                "id": "bg-68501",
+                "label": "BG-68501",
+                "entity_type": "drug",
+                "weight": 1,
+                "citation_ref": null
+            }
+        ],
+        "edges": [
+            {
+                "id": "capecitabine|docetaxel",
+                "source": "capecitabine",
+                "target": "docetaxel",
+                "weight": 2,
+                "citation_ref": "capecitabine|docetaxel"
+            },
+            {
+                "id": "pertuzumab|trastuzumab",
+                "source": "pertuzumab",
+                "target": "trastuzumab",
+                "weight": 2,
+                "citation_ref": "pertuzumab|trastuzumab"
+            },
+            {
+                "id": "5-fu\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide|5-fu\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide",
+                "source": "5-fu\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide",
+                "target": "5-fu\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide",
+                "weight": 1,
+                "citation_ref": "5-fu\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide|5-fu\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide"
+            },
+            {
+                "id": "a|b",
+                "source": "a",
+                "target": "b",
+                "weight": 1,
+                "citation_ref": "a|b"
+            },
+            {
+                "id": "alpelisib|fulvestrant",
+                "source": "alpelisib",
+                "target": "fulvestrant",
+                "weight": 1,
+                "citation_ref": "alpelisib|fulvestrant"
+            },
+            {
+                "id": "anastrozole|letrozole",
+                "source": "anastrozole",
+                "target": "letrozole",
+                "weight": 1,
+                "citation_ref": "anastrozole|letrozole"
+            },
+            {
+                "id": "bg-68501|fulvestrant",
+                "source": "bg-68501",
+                "target": "fulvestrant",
+                "weight": 1,
+                "citation_ref": "bg-68501|fulvestrant"
+            },
+            {
+                "id": "capecitabine|pertuzumab",
+                "source": "capecitabine",
+                "target": "pertuzumab",
+                "weight": 1,
+                "citation_ref": "capecitabine|pertuzumab"
+            },
+            {
+                "id": "capecitabine|trastuzumab",
+                "source": "capecitabine",
+                "target": "trastuzumab",
+                "weight": 1,
+                "citation_ref": "capecitabine|trastuzumab"
+            },
+            {
+                "id": "capecitabine|placebo",
+                "source": "capecitabine",
+                "target": "placebo",
+                "weight": 1,
+                "citation_ref": "capecitabine|placebo"
+            },
+            {
+                "id": "docetaxel|paclitaxel",
+                "source": "docetaxel",
+                "target": "paclitaxel",
+                "weight": 1,
+                "citation_ref": "docetaxel|paclitaxel"
+            },
+            {
+                "id": "docetaxel|pertuzumab",
+                "source": "docetaxel",
+                "target": "pertuzumab",
+                "weight": 1,
+                "citation_ref": "docetaxel|pertuzumab"
+            },
+            {
+                "id": "docetaxel|trastuzumab",
+                "source": "docetaxel",
+                "target": "trastuzumab",
+                "weight": 1,
+                "citation_ref": "docetaxel|trastuzumab"
+            },
+            {
+                "id": "fulvestrant|letrozole",
+                "source": "fulvestrant",
+                "target": "letrozole",
+                "weight": 1,
+                "citation_ref": "fulvestrant|letrozole"
+            },
+            {
+                "id": "paclitaxel|pertuzumab",
+                "source": "paclitaxel",
+                "target": "pertuzumab",
+                "weight": 1,
+                "citation_ref": "paclitaxel|pertuzumab"
+            },
+            {
+                "id": "paclitaxel|trastuzumab",
+                "source": "paclitaxel",
+                "target": "trastuzumab",
+                "weight": 1,
+                "citation_ref": "paclitaxel|trastuzumab"
+            },
+            {
+                "id": "carboplatin|paclitaxel",
+                "source": "carboplatin",
+                "target": "paclitaxel",
+                "weight": 1,
+                "citation_ref": "carboplatin|paclitaxel"
+            },
+            {
+                "id": "carboplatin|cyclophosphamide",
+                "source": "carboplatin",
+                "target": "cyclophosphamide",
+                "weight": 1,
+                "citation_ref": "carboplatin|cyclophosphamide"
+            },
+            {
+                "id": "cyclophosphamide|docetaxel",
+                "source": "cyclophosphamide",
+                "target": "docetaxel",
+                "weight": 1,
+                "citation_ref": "cyclophosphamide|docetaxel"
+            },
+            {
+                "id": "cyclophosphamide|paclitaxel",
+                "source": "cyclophosphamide",
+                "target": "paclitaxel",
+                "weight": 1,
+                "citation_ref": "cyclophosphamide|paclitaxel"
+            }
+        ]
+    },
+    "meta": {
+        "source": "ClinicalTrials.gov",
+        "generated_at": "2026-07-26T15:53:38.565283Z",
+        "query": "Show drug co-occurrence relationships in breast cancer trials.",
+        "analysis_plan": {
+            "intent": "relationship_network",
+            "metric": "trial_count",
+            "group_by": "drug",
+            "compare_by": null,
+            "network": {
+                "source": "drug",
+                "target": "drug"
+            },
+            "filters": {
+                "drug_names": [],
+                "conditions": [
+                    "Breast Cancer"
+                ],
+                "phases": [],
+                "sponsors": [],
+                "countries": [],
+                "recruitment_statuses": [],
+                "start_year": null,
+                "end_year": null
+            },
+            "visualization_type": "network_graph",
+            "confidence": 0.9,
+            "reasoning_summary": "Build a drug co-occurrence network for clinical trials where the condition is 'Breast Cancer'. Nodes will be drugs and edges represent co-occurrence in the same trial, weighted by trial count."
+        },
+        "filters_applied": {
+            "conditions": [
+                "Breast Cancer"
+            ]
+        },
+        "records_matched": 200,
+        "records_used": 66,
+        "records_excluded": 134,
+        "assumptions": [
+            "An edge represents two interventions appearing in the same clinical study."
+        ],
+        "warnings": [
+            "134 studies were excluded because they had no usable drug intervention names.",
+            "The network was limited to the top 25 of 108 drugs."
+        ],
+        "partial_results": true
+    },
+    "citations": {
+        "capecitabine|docetaxel": {
+            "total_records": 2,
+            "records_returned": 2,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT00169000",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Capecitabine, Docetaxel"
+                },
+                {
+                    "nct_id": "NCT01777945",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "capecitabine, docetaxel"
+                }
+            ]
+        },
+        "pertuzumab|trastuzumab": {
+            "total_records": 2,
+            "records_returned": 2,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Capecitabine, Pertuzumab, Trastuzumab"
+                },
+                {
+                    "nct_id": "NCT07377643",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Trastuzumab, IBI354, Docetaxel, Pertuzumab, Paclitaxel"
+                }
+            ]
+        },
+        "5-fu\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide|5-fu\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT01199432",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "5-FU\uff08intravenous infusion\uff09+epirubicin+cyclophosphamide, 5-FU\uff08intravenous bolus\uff09+epirubicin+cyclophosphamide, epirubicin+cyclophosphamide"
+                }
+            ]
+        },
+        "a|b": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT04215003",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "A, B, CL4"
+                }
+            ]
+        },
+        "alpelisib|fulvestrant": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT05631795",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Alpelisib, Fulvestrant"
+                }
+            ]
+        },
+        "anastrozole|letrozole": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT06930859",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Ribociclib, Letrozole, Anastrozole"
+                }
+            ]
+        },
+        "bg-68501|fulvestrant": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT06257264",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "BG-68501, Fulvestrant, BGB-43395"
+                }
+            ]
+        },
+        "capecitabine|pertuzumab": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Capecitabine, Pertuzumab, Trastuzumab"
+                }
+            ]
+        },
+        "capecitabine|trastuzumab": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Capecitabine, Pertuzumab, Trastuzumab"
+                }
+            ]
+        },
+        "capecitabine|placebo": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT02973737",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "pyrotinib, placebo, Capecitabine"
+                }
+            ]
+        },
+        "docetaxel|paclitaxel": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT07377643",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Trastuzumab, IBI354, Docetaxel, Pertuzumab, Paclitaxel"
+                }
+            ]
+        },
+        "docetaxel|pertuzumab": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT07377643",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Trastuzumab, IBI354, Docetaxel, Pertuzumab, Paclitaxel"
+                }
+            ]
+        },
+        "docetaxel|trastuzumab": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT07377643",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Trastuzumab, IBI354, Docetaxel, Pertuzumab, Paclitaxel"
+                }
+            ]
+        },
+        "fulvestrant|letrozole": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT05226871",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Palbociclib, Cetuximab, Fulvestrant, Letrozole"
+                }
+            ]
+        },
+        "paclitaxel|pertuzumab": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT07377643",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Trastuzumab, IBI354, Docetaxel, Pertuzumab, Paclitaxel"
+                }
+            ]
+        },
+        "paclitaxel|trastuzumab": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT07377643",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Trastuzumab, IBI354, Docetaxel, Pertuzumab, Paclitaxel"
+                }
+            ]
+        },
+        "carboplatin|paclitaxel": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT00002854",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "filgrastim, carboplatin, cisplatin, cyclophosphamide, etoposide, ifosfamide, mesna, paclitaxel, peripheral blood stem cell transplantation"
+                }
+            ]
+        },
+        "carboplatin|cyclophosphamide": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT00002854",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "filgrastim, carboplatin, cisplatin, cyclophosphamide, etoposide, ifosfamide, mesna, paclitaxel, peripheral blood stem cell transplantation"
+                }
+            ]
+        },
+        "cyclophosphamide|docetaxel": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT02685657",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "Drug: Selumetinib, Doxorubicin, Cyclophosphamide, Docetaxel"
+                }
+            ]
+        },
+        "cyclophosphamide|paclitaxel": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT00002854",
+                    "field": "normalized.interventions.name",
+                    "excerpt": "filgrastim, carboplatin, cisplatin, cyclophosphamide, etoposide, ifosfamide, mesna, paclitaxel, peripheral blood stem cell transplantation"
+                }
+            ]
+        }
+    }
+}

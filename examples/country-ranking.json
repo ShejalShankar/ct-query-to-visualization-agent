@@ -1,0 +1,462 @@
+{
+    "status": "completed",
+    "visualization": {
+        "type": "bar_chart",
+        "title": "Countries Ranked by Number of Clinical Trials",
+        "description": "Countries ranked by the number of matching studies with at least one reported study location.",
+        "encoding": {
+            "x": {
+                "field": "country",
+                "data_type": "nominal",
+                "label": "Country",
+                "unit": null
+            },
+            "y": {
+                "field": "trial_count",
+                "data_type": "quantitative",
+                "label": "Number of trials",
+                "unit": "trials"
+            }
+        },
+        "data": [
+            {
+                "datum_id": "country:united-states",
+                "citation_ref": "United States",
+                "country": "United States",
+                "trial_count": 76,
+                "rank": 1
+            },
+            {
+                "datum_id": "country:china",
+                "citation_ref": "China",
+                "country": "China",
+                "trial_count": 27,
+                "rank": 2
+            },
+            {
+                "datum_id": "country:france",
+                "citation_ref": "France",
+                "country": "France",
+                "trial_count": 17,
+                "rank": 3
+            },
+            {
+                "datum_id": "country:canada",
+                "citation_ref": "Canada",
+                "country": "Canada",
+                "trial_count": 13,
+                "rank": 4
+            },
+            {
+                "datum_id": "country:italy",
+                "citation_ref": "Italy",
+                "country": "Italy",
+                "trial_count": 11,
+                "rank": 5
+            },
+            {
+                "datum_id": "country:south-korea",
+                "citation_ref": "South Korea",
+                "country": "South Korea",
+                "trial_count": 10,
+                "rank": 6
+            },
+            {
+                "datum_id": "country:taiwan",
+                "citation_ref": "Taiwan",
+                "country": "Taiwan",
+                "trial_count": 9,
+                "rank": 7
+            },
+            {
+                "datum_id": "country:spain",
+                "citation_ref": "Spain",
+                "country": "Spain",
+                "trial_count": 8,
+                "rank": 8
+            },
+            {
+                "datum_id": "country:turkey-(t\u00fcrkiye)",
+                "citation_ref": "Turkey (T\u00fcrkiye)",
+                "country": "Turkey (T\u00fcrkiye)",
+                "trial_count": 8,
+                "rank": 9
+            },
+            {
+                "datum_id": "country:united-kingdom",
+                "citation_ref": "United Kingdom",
+                "country": "United Kingdom",
+                "trial_count": 8,
+                "rank": 10
+            }
+        ],
+        "nodes": null,
+        "edges": null
+    },
+    "meta": {
+        "source": "ClinicalTrials.gov",
+        "generated_at": "2026-07-26T15:51:33.807636Z",
+        "query": "Which countries have conducted the most breast cancer clinical trials?",
+        "analysis_plan": {
+            "intent": "geographic_ranking",
+            "metric": "trial_count",
+            "group_by": "country",
+            "compare_by": null,
+            "network": null,
+            "filters": {
+                "drug_names": [],
+                "conditions": [
+                    "Breast Cancer"
+                ],
+                "phases": [],
+                "sponsors": [],
+                "countries": [],
+                "recruitment_statuses": [],
+                "start_year": null,
+                "end_year": null
+            },
+            "visualization_type": "bar_chart",
+            "confidence": 0.9,
+            "reasoning_summary": "Count and rank clinical trials labeled with the condition 'Breast Cancer' by country (no year/phase restrictions) and present the country ranking as a bar chart."
+        },
+        "filters_applied": {
+            "conditions": [
+                "Breast Cancer"
+            ]
+        },
+        "records_matched": 200,
+        "records_used": 180,
+        "records_excluded": 20,
+        "assumptions": [
+            "A multi-country study contributes once to each distinct reported country."
+        ],
+        "warnings": [
+            "20 studies were excluded because they had no usable country information.",
+            "Some studies contribute to multiple countries because they include sites in more than one country.",
+            "Only the top 10 of 63 countries are included in the ranking."
+        ],
+        "partial_results": true
+    },
+    "citations": {
+        "United States": {
+            "total_records": 76,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00002854",
+                    "field": "normalized.countries",
+                    "excerpt": "United States"
+                },
+                {
+                    "nct_id": "NCT00005873",
+                    "field": "normalized.countries",
+                    "excerpt": "United States"
+                },
+                {
+                    "nct_id": "NCT00030498",
+                    "field": "normalized.countries",
+                    "excerpt": "United States"
+                },
+                {
+                    "nct_id": "NCT00071942",
+                    "field": "normalized.countries",
+                    "excerpt": "United States"
+                },
+                {
+                    "nct_id": "NCT00153907",
+                    "field": "normalized.countries",
+                    "excerpt": "United States"
+                }
+            ]
+        },
+        "China": {
+            "total_records": 27,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT01199432",
+                    "field": "normalized.countries",
+                    "excerpt": "China"
+                },
+                {
+                    "nct_id": "NCT01395056",
+                    "field": "normalized.countries",
+                    "excerpt": "China"
+                },
+                {
+                    "nct_id": "NCT02839954",
+                    "field": "normalized.countries",
+                    "excerpt": "China"
+                },
+                {
+                    "nct_id": "NCT02973737",
+                    "field": "normalized.countries",
+                    "excerpt": "China"
+                },
+                {
+                    "nct_id": "NCT04215003",
+                    "field": "normalized.countries",
+                    "excerpt": "China"
+                }
+            ]
+        },
+        "France": {
+            "total_records": 17,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00263588",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Austria, Belgium, Canada, France, Germany, Greece, India, Italy, Japan, Poland, Spain, Sweden, Switzerland, Taiwan, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT00681122",
+                    "field": "normalized.countries",
+                    "excerpt": "Australia, Austria, Belgium, Chile, Colombia, Croatia, Czechia, Finland, France, Greece, Italy, Peru, Romania, Sweden, Switzerland, Turkey (T\u00fcrkiye), United Kingdom, Venezuela"
+                },
+                {
+                    "nct_id": "NCT00963911",
+                    "field": "normalized.countries",
+                    "excerpt": "France"
+                },
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.countries",
+                    "excerpt": "Argentina, Austria, Belgium, Brazil, Canada, Croatia, Czechia, Estonia, France, Germany, Hong Kong, Hungary, Italy, Mexico, Netherlands, Peru, Poland, Romania, Russia, South Korea, Spain, Thailand, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT01183832",
+                    "field": "normalized.countries",
+                    "excerpt": "France, Monaco"
+                }
+            ]
+        },
+        "Canada": {
+            "total_records": 13,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00123786",
+                    "field": "normalized.countries",
+                    "excerpt": "Canada"
+                },
+                {
+                    "nct_id": "NCT00207324",
+                    "field": "normalized.countries",
+                    "excerpt": "Canada"
+                },
+                {
+                    "nct_id": "NCT00221221",
+                    "field": "normalized.countries",
+                    "excerpt": "Canada"
+                },
+                {
+                    "nct_id": "NCT00263588",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Austria, Belgium, Canada, France, Germany, Greece, India, Italy, Japan, Poland, Spain, Sweden, Switzerland, Taiwan, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT00679783",
+                    "field": "normalized.countries",
+                    "excerpt": "Canada"
+                }
+            ]
+        },
+        "Italy": {
+            "total_records": 11,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00263588",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Austria, Belgium, Canada, France, Germany, Greece, India, Italy, Japan, Poland, Spain, Sweden, Switzerland, Taiwan, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT00681122",
+                    "field": "normalized.countries",
+                    "excerpt": "Australia, Austria, Belgium, Chile, Colombia, Croatia, Czechia, Finland, France, Greece, Italy, Peru, Romania, Sweden, Switzerland, Turkey (T\u00fcrkiye), United Kingdom, Venezuela"
+                },
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.countries",
+                    "excerpt": "Argentina, Austria, Belgium, Brazil, Canada, Croatia, Czechia, Estonia, France, Germany, Hong Kong, Hungary, Italy, Mexico, Netherlands, Peru, Poland, Romania, Russia, South Korea, Spain, Thailand, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT02404441",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Canada, France, Germany, Hungary, Italy, Lebanon, Netherlands, Norway, Poland, Spain, Taiwan, Thailand, Turkey (T\u00fcrkiye)"
+                },
+                {
+                    "nct_id": "NCT02950207",
+                    "field": "normalized.countries",
+                    "excerpt": "Italy"
+                }
+            ]
+        },
+        "South Korea": {
+            "total_records": 10,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.countries",
+                    "excerpt": "Argentina, Austria, Belgium, Brazil, Canada, Croatia, Czechia, Estonia, France, Germany, Hong Kong, Hungary, Italy, Mexico, Netherlands, Peru, Poland, Romania, Russia, South Korea, Spain, Thailand, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT01190566",
+                    "field": "normalized.countries",
+                    "excerpt": "South Korea"
+                },
+                {
+                    "nct_id": "NCT01969253",
+                    "field": "normalized.countries",
+                    "excerpt": "South Korea"
+                },
+                {
+                    "nct_id": "NCT02168452",
+                    "field": "normalized.countries",
+                    "excerpt": "South Korea"
+                },
+                {
+                    "nct_id": "NCT02364557",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Canada, Saudi Arabia, South Korea"
+                }
+            ]
+        },
+        "Taiwan": {
+            "total_records": 9,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00263588",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Austria, Belgium, Canada, France, Germany, Greece, India, Italy, Japan, Poland, Spain, Sweden, Switzerland, Taiwan, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT00270569",
+                    "field": "normalized.countries",
+                    "excerpt": "Taiwan"
+                },
+                {
+                    "nct_id": "NCT01927939",
+                    "field": "normalized.countries",
+                    "excerpt": "Taiwan"
+                },
+                {
+                    "nct_id": "NCT02404441",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Canada, France, Germany, Hungary, Italy, Lebanon, Netherlands, Norway, Poland, Spain, Taiwan, Thailand, Turkey (T\u00fcrkiye)"
+                },
+                {
+                    "nct_id": "NCT03858972",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Canada, South Korea, Spain, Taiwan"
+                }
+            ]
+        },
+        "Spain": {
+            "total_records": 8,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00263588",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Austria, Belgium, Canada, France, Germany, Greece, India, Italy, Japan, Poland, Spain, Sweden, Switzerland, Taiwan, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.countries",
+                    "excerpt": "Argentina, Austria, Belgium, Brazil, Canada, Croatia, Czechia, Estonia, France, Germany, Hong Kong, Hungary, Italy, Mexico, Netherlands, Peru, Poland, Romania, Russia, South Korea, Spain, Thailand, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT01837095",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Spain"
+                },
+                {
+                    "nct_id": "NCT02404441",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Canada, France, Germany, Hungary, Italy, Lebanon, Netherlands, Norway, Poland, Spain, Taiwan, Thailand, Turkey (T\u00fcrkiye)"
+                },
+                {
+                    "nct_id": "NCT03678883",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Belgium, Canada, France, Netherlands, Portugal, Spain"
+                }
+            ]
+        },
+        "Turkey (T\u00fcrkiye)": {
+            "total_records": 8,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00557986",
+                    "field": "normalized.countries",
+                    "excerpt": "Turkey (T\u00fcrkiye)"
+                },
+                {
+                    "nct_id": "NCT00681122",
+                    "field": "normalized.countries",
+                    "excerpt": "Australia, Austria, Belgium, Chile, Colombia, Croatia, Czechia, Finland, France, Greece, Italy, Peru, Romania, Sweden, Switzerland, Turkey (T\u00fcrkiye), United Kingdom, Venezuela"
+                },
+                {
+                    "nct_id": "NCT02404441",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Canada, France, Germany, Hungary, Italy, Lebanon, Netherlands, Norway, Poland, Spain, Taiwan, Thailand, Turkey (T\u00fcrkiye)"
+                },
+                {
+                    "nct_id": "NCT04770129",
+                    "field": "normalized.countries",
+                    "excerpt": "Turkey (T\u00fcrkiye)"
+                },
+                {
+                    "nct_id": "NCT04795778",
+                    "field": "normalized.countries",
+                    "excerpt": "Turkey (T\u00fcrkiye)"
+                }
+            ]
+        },
+        "United Kingdom": {
+            "total_records": 8,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT00127465",
+                    "field": "normalized.countries",
+                    "excerpt": "United Kingdom"
+                },
+                {
+                    "nct_id": "NCT00263588",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Australia, Austria, Belgium, Canada, France, Germany, Greece, India, Italy, Japan, Poland, Spain, Sweden, Switzerland, Taiwan, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT00681122",
+                    "field": "normalized.countries",
+                    "excerpt": "Australia, Austria, Belgium, Chile, Colombia, Croatia, Czechia, Finland, France, Greece, Italy, Peru, Romania, Sweden, Switzerland, Turkey (T\u00fcrkiye), United Kingdom, Venezuela"
+                },
+                {
+                    "nct_id": "NCT00802945",
+                    "field": "normalized.countries",
+                    "excerpt": "United States, Belgium, United Kingdom"
+                },
+                {
+                    "nct_id": "NCT01026142",
+                    "field": "normalized.countries",
+                    "excerpt": "Argentina, Austria, Belgium, Brazil, Canada, Croatia, Czechia, Estonia, France, Germany, Hong Kong, Hungary, Italy, Mexico, Netherlands, Peru, Poland, Romania, Russia, South Korea, Spain, Thailand, United Kingdom"
+                }
+            ]
+        }
+    }
+}

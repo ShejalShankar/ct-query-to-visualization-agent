@@ -1,0 +1,259 @@
+{
+    "status": "completed",
+    "visualization": {
+        "type": "bar_chart",
+        "title": "Clinical Trial Distribution by Phase",
+        "description": "Number of matching studies grouped by phase.",
+        "encoding": {
+            "x": {
+                "field": "category",
+                "data_type": "nominal",
+                "label": "Phase",
+                "unit": null
+            },
+            "y": {
+                "field": "trial_count",
+                "data_type": "quantitative",
+                "label": "Number of trials",
+                "unit": "trials"
+            }
+        },
+        "data": [
+            {
+                "datum_id": "phase:phase2",
+                "citation_ref": "PHASE2",
+                "category": "PHASE2",
+                "trial_count": 128
+            },
+            {
+                "datum_id": "phase:phase1",
+                "citation_ref": "PHASE1",
+                "category": "PHASE1",
+                "trial_count": 66
+            },
+            {
+                "datum_id": "phase:phase3",
+                "citation_ref": "PHASE3",
+                "category": "PHASE3",
+                "trial_count": 18
+            },
+            {
+                "datum_id": "phase:na",
+                "citation_ref": "NA",
+                "category": "NA",
+                "trial_count": 6
+            },
+            {
+                "datum_id": "phase:early_phase1",
+                "citation_ref": "EARLY_PHASE1",
+                "category": "EARLY_PHASE1",
+                "trial_count": 1
+            },
+            {
+                "datum_id": "phase:phase4",
+                "citation_ref": "PHASE4",
+                "category": "PHASE4",
+                "trial_count": 1
+            }
+        ],
+        "nodes": null,
+        "edges": null
+    },
+    "meta": {
+        "source": "ClinicalTrials.gov",
+        "generated_at": "2026-07-26T15:50:16.249737Z",
+        "query": "Show the distribution of trial phases for pembrolizumab.",
+        "analysis_plan": {
+            "intent": "distribution",
+            "metric": "trial_count",
+            "group_by": "phase",
+            "compare_by": null,
+            "network": null,
+            "filters": {
+                "drug_names": [
+                    "Pembrolizumab"
+                ],
+                "conditions": [],
+                "phases": [],
+                "sponsors": [],
+                "countries": [],
+                "recruitment_statuses": [],
+                "start_year": null,
+                "end_year": null
+            },
+            "visualization_type": "bar_chart",
+            "confidence": 0.95,
+            "reasoning_summary": "User requests a categorical breakdown of trials by trial phase for the drug pembrolizumab; present counts per phase as a bar chart."
+        },
+        "filters_applied": {
+            "drug_names": [
+                "Pembrolizumab"
+            ]
+        },
+        "records_matched": 200,
+        "records_used": 188,
+        "records_excluded": 12,
+        "assumptions": [
+            "A study may contribute to multiple categories when the selected field contains multiple values."
+        ],
+        "warnings": [
+            "12 studies were excluded because they had no usable value for 'phase'.",
+            "Some studies contribute to multiple categories because the 'phase' dimension is multi-valued."
+        ],
+        "partial_results": true
+    },
+    "citations": {
+        "PHASE2": {
+            "total_records": 128,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02089685",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1, PHASE2"
+                },
+                {
+                    "nct_id": "NCT02302339",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE2"
+                },
+                {
+                    "nct_id": "NCT02325557",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1, PHASE2"
+                },
+                {
+                    "nct_id": "NCT02423863",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE2"
+                },
+                {
+                    "nct_id": "NCT02437071",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE2"
+                }
+            ]
+        },
+        "PHASE1": {
+            "total_records": 66,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02054806",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1"
+                },
+                {
+                    "nct_id": "NCT02089685",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1, PHASE2"
+                },
+                {
+                    "nct_id": "NCT02325557",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1, PHASE2"
+                },
+                {
+                    "nct_id": "NCT02437136",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1, PHASE2"
+                },
+                {
+                    "nct_id": "NCT02443324",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE1"
+                }
+            ]
+        },
+        "PHASE3": {
+            "total_records": 18,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02256436",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE3"
+                },
+                {
+                    "nct_id": "NCT02578680",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE3"
+                },
+                {
+                    "nct_id": "NCT02853331",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE3"
+                },
+                {
+                    "nct_id": "NCT03062358",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE3"
+                },
+                {
+                    "nct_id": "NCT03520686",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE3"
+                }
+            ]
+        },
+        "NA": {
+            "total_records": 6,
+            "records_returned": 5,
+            "truncated": true,
+            "records": [
+                {
+                    "nct_id": "NCT02489357",
+                    "field": "normalized.phase",
+                    "excerpt": "NA"
+                },
+                {
+                    "nct_id": "NCT02922283",
+                    "field": "normalized.phase",
+                    "excerpt": "NA"
+                },
+                {
+                    "nct_id": "NCT03769129",
+                    "field": "normalized.phase",
+                    "excerpt": "NA"
+                },
+                {
+                    "nct_id": "NCT05653531",
+                    "field": "normalized.phase",
+                    "excerpt": "NA"
+                },
+                {
+                    "nct_id": "NCT05655663",
+                    "field": "normalized.phase",
+                    "excerpt": "NA"
+                }
+            ]
+        },
+        "EARLY_PHASE1": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT03815084",
+                    "field": "normalized.phase",
+                    "excerpt": "EARLY_PHASE1"
+                }
+            ]
+        },
+        "PHASE4": {
+            "total_records": 1,
+            "records_returned": 1,
+            "truncated": false,
+            "records": [
+                {
+                    "nct_id": "NCT04489888",
+                    "field": "normalized.phase",
+                    "excerpt": "PHASE4"
+                }
+            ]
+        }
+    }
+}
