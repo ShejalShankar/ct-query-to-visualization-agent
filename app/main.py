@@ -16,17 +16,20 @@ DEMO_FILE = Path(__file__).parent / "demo" / "index.html"
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.http_client = httpx.AsyncClient(
-        base_url=settings.clinical_trials_base_url,
-        timeout=httpx.Timeout(
-            settings.clinical_trials_timeout_seconds
+    base_url=settings.clinical_trials_base_url,
+    timeout=httpx.Timeout(
+        settings.clinical_trials_timeout_seconds
+    ),
+    headers={
+        "Accept": "application/json",
+        "User-Agent": (
+            "ClinicalTrialsVisualizationAgent/1.0 "
+            "(https://github.com/ShejalShankar/"
+            "ct-query-to-visualization-agent)"
         ),
-        headers={
-            "Accept": "application/json",
-            "User-Agent": (
-                "clinical-trials-query-to-visualization-agent/0.1.0"
-            ),
-        },
-    )
+    },
+    follow_redirects=True,
+)
 
     try:
         yield
