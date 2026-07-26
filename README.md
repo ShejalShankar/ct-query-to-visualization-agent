@@ -38,5 +38,45 @@ Visualization specification
           |
           v
 Interactive chart + citations
+```
 
 The LLM decides what analysis the user is requesting. It does not retrieve records, count studies, calculate rankings, or invent chart data.
+
+## Key Design Decsions
+
+### LLM planning, deterministic execution
+The planner converts flexible natural language into a validated AnalysisPlan.
+All downstream computations are performed in Python against normalized
+ClinicalTrials.gov records.
+This reduces hallucination risk and makes analytical results reproducible and
+unit-testable.
+
+### Strong contracts between layers
+Pydantic models define contracts for:
+* user requests
+* planner output
+* normalized studies
+* analysis results
+* visualization specifications
+* metadata and citations
+
+Invalid or inconsistent data fails early rather than silently reaching the
+client.
+
+### Normalization before analysis
+ClinicalTrials.gov records contain nested, optional, and partially structured
+fields. The normalization layer converts them into a stable internal domain
+model and records warnings for missing or invalid values.
+
+This keeps upstream API-specific details out of the analysis engine.
+
+### Explicit partial-result handling
+Broad ClinicalTrials.gov queries may match thousands of records. Requests
+therefore enforce a configurable retrieval limit.
+```
+{
+
+  "partial_results": true
+
+}
+```
