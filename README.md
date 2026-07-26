@@ -12,6 +12,10 @@ construction, and citation generation are deterministic.
 - OpenAPI documentation: `/docs`
 - Health check: `/health`
 - Visualization endpoint: `POST /api/v1/visualizations`
+- **Interactive Demo**
+https://ct-query-to-visualization-agent.vercel.app/demo
+**API Documentation (Swagger)**
+https://ct-query-to-visualization-agent.vercel.app/docs
 
 
 ## Why this architecture?
