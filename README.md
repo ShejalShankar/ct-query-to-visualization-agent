@@ -159,6 +159,92 @@ curl -X POST "http://127.0.0.1:8000/api/v1/visualizations" \
     "max_citations_per_datum": 5
   }'
 
+### API Contract
+
+Endpoint
+```
+POST /api/v1/visualizations
+```
+
+#### Request Schema
+
+| Field | Type | Required | Default | Description |
+|-------|------|:--------:|:-------:|-------------|
+| `query` | `string` | ✅ | — | Natural-language clinical trial question to analyze. |
+| `max_studies` | `integer` | ❌ | `200` | Maximum number of studies retrieved before analysis. |
+| `include_citations` | `boolean` | ❌ | `true` | Whether to include supporting citations in the response. |
+| `max_citations_per_datum` | `integer` | ❌ | `5` | Maximum citations returned for each visualization datum. |
+
+Parameters
+* query (required): Natural-language clinical trial question to analyze.
+* max_studies: Maximum number of studies retrieved before deterministic analysis.
+* include_citations: Whether supporting ClinicalTrials.gov citations are included.
+* max_citations_per_datum: Maximum citations returned for each visualization datum.
+
+#### Example Request
+
+```
+{
+  "query": "How have pembrolizumab trials changed since 2015?",
+  "max_studies": 200,
+  "include_citations": true,
+  "max_citations_per_datum": 5
+}
+```
+
+#### Top-Level Response
+| Field | Type | Description |
+
+|-------|------|-------------|
+
+| `visualization` | `object` | Frontend-ready visualization specification. |
+
+| `metadata` | `object` | Planner output, execution statistics, warnings, and assumptions. |
+
+| `citations` | `array` | Supporting ClinicalTrials.gov citations grouped by visualization element. |
+
+#### Visualization Object
+| Field | Type | Description |
+
+|-------|------|-------------|
+
+| `type` | `string` | Visualization type (`line_chart`, `bar_chart`, `network_graph`). |
+
+| `title` | `string` | Human-readable visualization title. |
+
+| `description` | `string` | Brief explanation of the generated visualization. |
+
+| `encoding` | `object` | Declarative specification describing how the frontend should render the visualization. |
+
+| `data` | `array` | Chart data for line and bar visualizations. |
+
+| `nodes` | `array` | Nodes for relationship network visualizations. |
+
+| `edges` | `array` | Edges for relationship network visualizations. |
+
+#### Metadata Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `planner_confidence` | `number` | Confidence score reported by the planner. |
+| `analysis_plan` | `object` | Structured interpretation of the user's request. |
+| `records_matched` | `integer` | Number of studies matching the search. |
+| `records_analyzed` | `integer` | Number of studies included in the analysis. |
+| `partial_results` | `boolean` | Indicates whether retrieval limits prevented analysis of all matching studies. |
+| `assumptions` | `array[string]` | Planner assumptions made during interpretation. |
+| `warnings` | `array[string]` | Retrieval or analysis warnings surfaced to the user. |
+
+#### Citation Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `nct_id` | `string` | ClinicalTrials.gov study identifier. |
+| `field` | `string` | Study field supporting the visualization datum. |
+| `value` | `string` | Normalized value used during analysis. |
+| `excerpt` | `string` | Supporting evidence from the source study. |
+| `study_count` | `integer` | Number of studies contributing to the aggregated datum. |
+| `truncated` | `boolean` | Indicates whether additional citations were omitted due to the configured citation limit. 
+
 
 ### Testing
 The test suite covers API retrieval, pagination, normalization, deterministic
@@ -168,7 +254,6 @@ and HTTP endpoint validation.
 ```
 pytest -q
 ```
-
 
 ### Current tradeoffs
 * Broad queries may return partial results because retrieval is deliberately
@@ -188,5 +273,8 @@ pytest -q
 * Add sponsor-to-drug and condition-to-drug networks.
 * Add caching for repeated retrieval and analysis requests.
 * Add structured observability for planner, retrieval, and analysis latency.
+
+### Integrity Note
+
 
 
