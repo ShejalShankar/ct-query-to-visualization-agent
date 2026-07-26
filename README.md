@@ -150,6 +150,7 @@ Open:
 
 
 ### API example
+```
 curl -X POST "http://127.0.0.1:8000/api/v1/visualizations" \
   -H "Content-Type: application/json" \
   -d '{
@@ -158,6 +159,7 @@ curl -X POST "http://127.0.0.1:8000/api/v1/visualizations" \
     "include_citations": true,
     "max_citations_per_datum": 5
   }'
+```
 
 ### API Contract
 
