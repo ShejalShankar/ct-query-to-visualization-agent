@@ -193,34 +193,26 @@ Parameters
 ```
 
 #### Top-Level Response
+
 | Field | Type | Description |
-
 |-------|------|-------------|
-
 | `visualization` | `object` | Frontend-ready visualization specification. |
-
 | `metadata` | `object` | Planner output, execution statistics, warnings, and assumptions. |
-
 | `citations` | `array` | Supporting ClinicalTrials.gov citations grouped by visualization element. |
 
+
 #### Visualization Object
+
 | Field | Type | Description |
-
 |-------|------|-------------|
-
 | `type` | `string` | Visualization type (`line_chart`, `bar_chart`, `network_graph`). |
-
 | `title` | `string` | Human-readable visualization title. |
-
 | `description` | `string` | Brief explanation of the generated visualization. |
-
 | `encoding` | `object` | Declarative specification describing how the frontend should render the visualization. |
-
 | `data` | `array` | Chart data for line and bar visualizations. |
-
 | `nodes` | `array` | Nodes for relationship network visualizations. |
-
 | `edges` | `array` | Edges for relationship network visualizations. |
+
 
 #### Metadata Object
 
@@ -233,6 +225,7 @@ Parameters
 | `partial_results` | `boolean` | Indicates whether retrieval limits prevented analysis of all matching studies. |
 | `assumptions` | `array[string]` | Planner assumptions made during interpretation. |
 | `warnings` | `array[string]` | Retrieval or analysis warnings surfaced to the user. |
+
 
 #### Citation Object
 
@@ -276,5 +269,12 @@ pytest -q
 
 ### Integrity Note
 
+#### Tools used
+ChatGPT was used as an engineering assistant throughout development for architecture discussions, implementation planning, code generation for individual modules, debugging, test generation, and documentation. At runtime, the service itself uses an OpenAI model (gpt-5-mini) to convert natural-language questions into a structured AnalysisPlan, which is then executed deterministically by the backend.
 
+#### Validation
+Correctness was validated through unit tests covering ClinicalTrials.gov retrieval, normalization, deterministic analysis engines, visualization construction, planner behavior, orchestration, and API endpoints. In addition, representative queries were manually verified against ClinicalTrials.gov responses using the interactive demo.
+
+#### Design and implementation
+The overall architecture, API contracts, normalization layer, deterministic analysis pipeline, visualization response schema, citation model, and orchestration flow were intentionally designed for this project. AI-generated code was treated as a starting point and was reviewed, adapted, refactored, and integrated into the overall architecture before inclusion.
 
